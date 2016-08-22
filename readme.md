@@ -29,6 +29,18 @@ Each operation contains the following:
 
 ## Example
 
+Here is a basic example that performs two backup actions:
+
+- The first action operates over the _MyExternalDrive1_ and _MyKeychainDrive_ drives, if 
+they are connected. It will perform two backups: *Documents*, and *Projects*. The first
+operation copies the contents of your docs/ folder into a folder in your backup
+drives called Backups/docs, and the second operation copies three project folders into 
+their respective locations on Backups/Projects, excluding files with the .tmp and the .old extensions.
+
+- The second action will trigger if the drive called *MyPrivateDrive* is connected. It
+will copy the contents of your ~/files/private folder into Backups/private (on the mentioned
+drive)
+
 ```json
 {
 	"name": "My backup example",
