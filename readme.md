@@ -5,7 +5,7 @@ basically a higher-level layer on top of your system's rsync command.
 
 ## Usage
 
-Simply tell the script to process a file with all of your backup operations, like so:
+Simply tell the script to process a JSON file with all of your backup operations, like so:
 
 	syncmate.py backups.json
 
