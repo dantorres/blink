@@ -3,23 +3,13 @@
 #   Executes backup operations based on the instructions in the JSON input file
 #
 #   For example:
-#       syncmate -i backupList.json
+#       syncmate backupList.json
 #
 #       Will make backups of all the entries in backupList.json as specified
 #       on its backup drives.
+#       
+#   See included documentation for more information on the JSON format
 #
-#   Input filename format:
-#
-#       @( drive1, drive2, drive_n )                    # relative backup drives for the following lines
-#       <source folder>:<dest folder>;                  # optional comments
-#
-#   For example:
-#
-#       @(myDrive1)                                     # Perform backups on /Volumes/myDrive1
-#       $HOME/Pictures/Lightroom:photographyBackup;     # goes into /Volumes/myDrive1/PhotographyBackup
-#       ~/Projets:projects;                             # goes into /Volumes/myDrive1/projects
-#
-# non-threaded 0.0040
 
 import argparse
 import os
