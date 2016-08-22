@@ -5,13 +5,13 @@ basically a higher-level layer on top of your system's rsync command.
 
 ## Usage
 
-Run The following command to get a descripton of all available options:
-
-	syncmate.py --help
-
-Normally, you'd tell the script to process a file with all of your backup operations, like so:
+Simply tell the script to process a file with all of your backup operations, like so:
 
 	syncmate.py backups.json
+
+Optionally, run The following command to get a descripton of all available options:
+
+	syncmate.py --help
 
 ## JSON File Syntax
 
