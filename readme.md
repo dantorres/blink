@@ -24,7 +24,7 @@ A JSON backup file contains the following elements:
 Each operation contains the following:
 
 - The names of the drives you want to copy things into
-- A number of backup operations in source: destiny format.
+- A number of backup operations in source: destination format.
 - Optional parameters, like the files to exclude.
 
 ## Example
