@@ -17,9 +17,6 @@ import json
 import subprocess
 import multiprocessing
 
-# for debug
-from pprint import pprint
-
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -329,6 +326,6 @@ if __name__ == '__main__':
         for drive in BackupDrive.backupDrives:
             drive.performBackup(options)
 
-        notify(options, "done")
+    notify(options, "done")
     exit()
     
