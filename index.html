@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Blink : A script that helps you automate rsync operations">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Blink</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/dantorres/blink">View on GitHub</a>
+
+          <h1 id="project_title">Blink</h1>
+          <h2 id="project_tagline">A script that helps you automate rsync operations</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/dantorres/blink/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/dantorres/blink/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="blink" class="anchor" href="#blink" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Blink</h1>
+
+<p>A very simple script for keeping and maintaining backups of your stuff. This is
+basically a higher-level layer on top of your system's rsync command.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Simply tell the script to process a JSON file with all of your backup operations, like so:</p>
+
+<pre><code>blink.py backups.json
+</code></pre>
+
+<p>Optionally, run The following command to get a descripton of all available options:</p>
+
+<pre><code>blink.py --help
+</code></pre>
+
+<h2>
+<a id="json-file-syntax" class="anchor" href="#json-file-syntax" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSON File Syntax</h2>
+
+<p>A JSON backup file contains the following elements:</p>
+
+<ul>
+<li>The name of our backup run</li>
+<li>An array of backup operations.</li>
+<li>Optionally, a mounting point for your backup drives</li>
+</ul>
+
+<p>Each operation contains the following:</p>
+
+<ul>
+<li>The names of the drives you want to copy things into</li>
+<li>A number of backup operations in source: destination format.</li>
+<li>Optional parameters, like the files to exclude.</li>
+</ul>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<p>Here is a basic example that performs two backup actions:</p>
+
+<ul>
+<li><p>The first action operates over the <em>MyExternalDrive1</em> and <em>MyKeychainDrive</em> drives, if 
+they are connected. It will perform two backups: <em>Documents</em>, and <em>Projects</em>. The first
+operation copies the contents of your docs/ folder into a folder in your backup
+drives called Backups/docs, and the second operation copies three project folders into 
+their respective locations on Backups/Projects, excluding files with the .tmp and the .old extensions.</p></li>
+<li><p>The second action will trigger if the drive called <em>MyPrivateDrive</em> is connected. It
+will copy the contents of your ~/files/private folder into Backups/private (on the mentioned
+drive)</p></li>
+</ul>
+
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>My backup example<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>actions<span class="pl-pds">"</span></span>:[
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>drives<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>MyExternalDrive1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>MyKeychainDrive<span class="pl-pds">"</span></span>],
+            <span class="pl-s"><span class="pl-pds">"</span>items<span class="pl-pds">"</span></span>: [
+                {
+                    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Documents<span class="pl-pds">"</span></span>,
+                    <span class="pl-s"><span class="pl-pds">"</span>backup<span class="pl-pds">"</span></span>: [
+                        { <span class="pl-s"><span class="pl-pds">"</span>~/docs<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Backups<span class="pl-pds">"</span></span>}
+                    ]
+                },
+
+                {
+                    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Projects<span class="pl-pds">"</span></span>,
+                    <span class="pl-s"><span class="pl-pds">"</span>exclude<span class="pl-pds">"</span></span>: [
+                        <span class="pl-s"><span class="pl-pds">"</span>*.tmp<span class="pl-pds">"</span></span>,
+                        <span class="pl-s"><span class="pl-pds">"</span>*.old<span class="pl-pds">"</span></span>
+                    ],
+                    <span class="pl-s"><span class="pl-pds">"</span>backup<span class="pl-pds">"</span></span>: [
+                        { <span class="pl-s"><span class="pl-pds">"</span>~/Projects/mine<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Backups/Projects<span class="pl-pds">"</span></span> },
+                        { <span class="pl-s"><span class="pl-pds">"</span>~/Projects/business<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Backups/Projects<span class="pl-pds">"</span></span> },
+                        { <span class="pl-s"><span class="pl-pds">"</span>~/Projects/private<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Backups/Projects<span class="pl-pds">"</span></span> }
+                    ]
+                }
+            ]
+        }, 
+
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>drives<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>MyPrivateDrive<span class="pl-pds">"</span></span>],
+            <span class="pl-s"><span class="pl-pds">"</span>items<span class="pl-pds">"</span></span>: [
+                {
+                    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Private important files<span class="pl-pds">"</span></span>,
+                    <span class="pl-s"><span class="pl-pds">"</span>backup<span class="pl-pds">"</span></span>: [
+                        { <span class="pl-s"><span class="pl-pds">"</span>~/Files/Private<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Backups<span class="pl-pds">"</span></span> }
+                    ]
+                }
+            ]
+        }
+    ]
+}</pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Blink maintained by <a href="https://github.com/dantorres">dantorres</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
