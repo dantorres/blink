@@ -1,4 +1,4 @@
-# Syncmate
+# Blink
 
 A very simple script for keeping and maintaining backups of your stuff. This is
 basically a higher-level layer on top of your system's rsync command.
@@ -7,11 +7,11 @@ basically a higher-level layer on top of your system's rsync command.
 
 Simply tell the script to process a JSON file with all of your backup operations, like so:
 
-	syncmate.py backups.json
+	blink.py backups.json
 
 Optionally, run The following command to get a descripton of all available options:
 
-	syncmate.py --help
+	blink.py --help
 
 ## JSON File Syntax
 
