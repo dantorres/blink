@@ -3,6 +3,9 @@
 A very simple script for keeping and maintaining backups of your stuff. This is
 basically a higher-level layer on top of your system's rsync command.
 
+I wrote it as a simple solution to keep my photography work backed up in a bunch of mobile
+drives whilst on the road, as well as my multiple home backup destinations. 
+
 ## Usage
 
 Simply tell the script to process a JSON file with all of your backup operations, like so:
